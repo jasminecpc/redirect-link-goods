@@ -3,29 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>正在開啟頁面...</title>
+  <title>JAS Studio</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --bg: #0f0f0f;
-      --card: #1a1a1a;
-      --border: #2a2a2a;
-      --text: #f0f0f0;
-      --muted: #888;
-      --accent: #1877F2;
-      --accent-light: #4a9dff;
-      --warn-bg: #1a1200;
-      --warn-border: #f5a623;
-      --warn-text: #f5c842;
-    }
-
     body {
       font-family: 'Noto Sans TC', sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      background: #F2F4F7;
+      color: #1a1a2e;
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -34,241 +21,357 @@
     }
 
     .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 40px 32px;
-      max-width: 420px;
+      background: #fff;
+      border-radius: 24px;
+      padding: 40px 28px 36px;
+      max-width: 400px;
       width: 100%;
-      text-align: center;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.10);
     }
 
-    .icon {
-      width: 64px;
-      height: 64px;
-      margin: 0 auto 24px;
-      background: var(--accent);
-      border-radius: 50%;
+    /* ── Header ── */
+    .header {
       display: flex;
       align-items: center;
-      justify-content: center;
-    }
-
-    .icon svg { width: 32px; height: 32px; fill: white; }
-
-    h1 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      line-height: 1.3;
-    }
-
-    .subtitle {
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.6;
+      gap: 14px;
       margin-bottom: 28px;
     }
 
-    /* ── Warning box (FB WebView only) ── */
-    .warn-box {
-      background: var(--warn-bg);
-      border: 1px solid var(--warn-border);
+    .logo {
+      width: 52px; height: 52px;
+      background: #1877F2;
       border-radius: 14px;
-      padding: 20px;
-      margin-bottom: 24px;
-      text-align: left;
-      display: none;
-    }
-
-    .warn-box .warn-title {
-      color: var(--warn-text);
-      font-weight: 700;
-      font-size: 0.95rem;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .warn-box ol {
-      color: #ccc;
-      font-size: 0.88rem;
-      line-height: 1.8;
-      padding-left: 18px;
-    }
-
-    .warn-box ol li { margin-bottom: 2px; }
-    .warn-box ol li strong { color: #fff; }
-
-    /* ── Buttons ── */
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 15px;
-      border-radius: 12px;
-      font-size: 1rem;
-      font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      border: none;
-      text-decoration: none;
-      transition: transform 0.1s, opacity 0.2s;
-    }
-
-    .btn:active { transform: scale(0.97); }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-      margin-bottom: 12px;
-    }
-
-    .btn-primary:hover { background: var(--accent-light); }
-
-    .btn-secondary {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.88rem;
-    }
-
-    .btn-secondary:hover { color: var(--text); border-color: #555; }
-
-    /* ── Steps visual (iOS FB) ── */
-    .steps {
-      display: none;
-      margin-bottom: 24px;
-      text-align: left;
-    }
-
-    .step {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    .step-num {
-      min-width: 28px;
-      height: 28px;
-      background: var(--accent);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #fff;
+      display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
 
-    .step-text {
-      font-size: 0.88rem;
-      color: #ccc;
-      line-height: 1.5;
-      padding-top: 4px;
+    .logo svg { width: 28px; height: 28px; fill: white; }
+
+    .header-text h1 {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #1a1a2e;
+      line-height: 1.2;
     }
 
-    .step-text strong { color: #fff; }
+    .header-text p {
+      font-size: 0.82rem;
+      color: #8892a4;
+      margin-top: 2px;
+    }
 
-    /* ── Redirect state ── */
-    .redirecting { display: none; }
+    /* ── Divider ── */
+    .divider {
+      height: 1px;
+      background: #edf0f4;
+      margin-bottom: 24px;
+    }
+
+    /* ── Spinner state ── */
+    #state-redirect .spinner-wrap {
+      text-align: center;
+      padding: 16px 0 8px;
+    }
+
     .spinner {
-      width: 40px; height: 40px;
-      border: 3px solid var(--border);
-      border-top-color: var(--accent);
+      width: 44px; height: 44px;
+      border: 4px solid #e8ecf2;
+      border-top-color: #1877F2;
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
-      margin: 0 auto 16px;
+      margin: 0 auto 20px;
     }
+
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    .url-display {
-      background: #111;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px 16px;
-      font-size: 0.8rem;
-      color: var(--muted);
-      word-break: break-all;
-      margin-top: 20px;
-      text-align: left;
+    #state-redirect h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 6px;
     }
+
+    #state-redirect p {
+      font-size: 0.88rem;
+      color: #8892a4;
+    }
+
+    /* ── Alert banner ── */
+    .alert {
+      background: #FFF8E7;
+      border: 1.5px solid #F5C842;
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 22px;
+    }
+
+    .alert-icon { font-size: 1.2rem; flex-shrink: 0; line-height: 1.4; }
+
+    .alert-body { font-size: 0.85rem; color: #7a5c00; line-height: 1.5; }
+    .alert-body strong { color: #5a3e00; }
+
+    /* ── Step cards ── */
+    .steps { display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
+
+    .step-card {
+      background: #F7F9FC;
+      border: 1.5px solid #E8ECF4;
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .step-badge {
+      min-width: 36px; height: 36px;
+      background: #1877F2;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 900;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .step-content {}
+    .step-content .step-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      line-height: 1.3;
+      margin-bottom: 3px;
+    }
+
+    .step-content .step-title .highlight {
+      color: #1877F2;
+    }
+
+    .step-content .step-desc {
+      font-size: 0.78rem;
+      color: #8892a4;
+      line-height: 1.4;
+    }
+
+    /* ── Tip card (yellow) ── */
+    .tip-card {
+      background: #FFF8E7;
+      border: 1.5px solid #F5C842;
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .tip-badge {
+      min-width: 36px; height: 36px;
+      background: #F5C842;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .tip-content .step-title { color: #7a5c00; }
+    .tip-content .step-desc { color: #a07a20; }
+
+    /* ── URL copy box ── */
+    .copy-box {
+      background: #F7F9FC;
+      border: 1.5px solid #E8ECF4;
+      border-radius: 12px;
+      padding: 13px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .copy-box:hover { border-color: #1877F2; background: #EFF4FF; }
+    .copy-box:active { transform: scale(0.98); }
+
+    .copy-url {
+      font-size: 0.78rem;
+      color: #5a6680;
+      word-break: break-all;
+      flex: 1;
+    }
+
+    .copy-btn-icon {
+      min-width: 30px; height: 30px;
+      background: #1877F2;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .copy-btn-icon svg { width: 14px; height: 14px; fill: white; }
+
+    .copy-hint {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #b0b8cc;
+      margin-top: 7px;
+    }
+
+    /* ── Primary button ── */
+    .btn-primary {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: #1877F2;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      margin-bottom: 10px;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .btn-primary:hover { background: #1565D8; }
+    .btn-primary:active { transform: scale(0.97); }
+
+    /* ── Android warn box ── */
+    .android-steps {
+      background: #F7F9FC;
+      border: 1.5px solid #E8ECF4;
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 18px;
+    }
+
+    .android-steps .label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #8892a4;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .android-steps ol {
+      padding-left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .android-steps li {
+      font-size: 0.88rem;
+      color: #3a4255;
+      line-height: 1.4;
+    }
+
+    .android-steps li strong { color: #1a1a2e; }
   </style>
 </head>
 <body>
 <div class="card">
 
-  <!-- Icon -->
-  <div class="icon">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.5 7h-2.25C13.56 9 13 9.56 13 10.25V12h3l-.5 3H13v7h-3v-7H8v-3h2v-1.75C10 7.57 11.57 6 13.25 6H16.5v3z"/>
-    </svg>
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.5 7h-2.25C13.56 9 13 9.56 13 10.25V12h3l-.5 3H13v7h-3v-7H8v-3h2v-1.75C10 7.57 11.57 6 13.25 6H16.5v3z"/></svg>
+    </div>
+    <div class="header-text">
+      <h1>JAS Studio</h1>
+      <p>linkgoods.com/jasstudio</p>
+    </div>
   </div>
 
-  <!-- Normal redirect state -->
+  <div class="divider"></div>
+
+  <!-- State: Normal redirect -->
   <div id="state-redirect">
-    <h1>正在前往 JAS Studio</h1>
-    <p class="subtitle">即將跳轉到內容頁面，請稍候…</p>
-    <div class="spinner"></div>
+    <div class="spinner-wrap">
+      <div class="spinner"></div>
+      <h2>正在前往頁面…</h2>
+      <p>即將自動跳轉，請稍候</p>
+    </div>
   </div>
 
-  <!-- FB WebView – Android -->
+  <!-- State: Android FB WebView -->
   <div id="state-android" style="display:none">
-    <h1>⚠️ 請用瀏覽器開啟</h1>
-    <p class="subtitle">在 Facebook 內建瀏覽器中，部分連結無法正常顯示。請按以下步驟用外部瀏覽器開啟：</p>
-
-    <div class="warn-box" style="display:block">
-      <div class="warn-title">
-        <span>📱</span> Android 操作步驟
+    <div class="alert">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-body">
+        <strong>Facebook 內建瀏覽器</strong>會限制部分連結，請改用外部瀏覽器瀏覽。
       </div>
+    </div>
+
+    <div class="android-steps">
+      <div class="label">操作步驟</div>
       <ol>
         <li>點右上角 <strong>⋮ 三點選單</strong></li>
         <li>選擇「<strong>在瀏覽器中開啟</strong>」</li>
-        <li>或複製下方連結，貼到 Chrome 開啟</li>
+        <li>或點下方按鈕直接用 Chrome 開啟</li>
       </ol>
     </div>
 
-    <a id="btn-android-intent" class="btn btn-primary" href="#">🌐 用 Chrome 開啟</a>
-    <div class="url-display" id="url-display-android"></div>
+    <a id="btn-android-intent" class="btn-primary" href="#">🌐 用 Chrome 開啟</a>
+
+    <div class="copy-box" id="copy-box-android">
+      <span class="copy-url" id="url-display-android"></span>
+      <div class="copy-btn-icon">
+        <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+      </div>
+    </div>
+    <div class="copy-hint">點上方複製連結</div>
   </div>
 
-  <!-- FB WebView – iOS -->
+  <!-- State: iOS FB WebView -->
   <div id="state-ios" style="display:none">
-    <h1>⚠️ 請用 Safari 開啟</h1>
-    <p class="subtitle">Facebook 內建瀏覽器會限制部分連結，請照以下步驟改用 Safari 開啟。</p>
-
-    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px; text-align:left">
-
-      <div style="background:#111; border:1px solid #2a2a2a; border-radius:14px; padding:16px; display:flex; gap:14px; align-items:flex-start">
-        <div style="min-width:36px; height:36px; background:#1877F2; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0">1️⃣</div>
-        <div>
-          <div style="font-weight:700; font-size:0.95rem; margin-bottom:4px">點右上角「<strong style="color:#4a9dff">⋯</strong>」按鈕</div>
-          <div style="color:#888; font-size:0.82rem">畫面右上方三個點的更多選單</div>
-        </div>
+    <div class="alert">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-body">
+        <strong>Facebook 內建瀏覽器</strong>會限制部分連結，請改用 Safari 瀏覽。
       </div>
-
-      <div style="background:#111; border:1px solid #2a2a2a; border-radius:14px; padding:16px; display:flex; gap:14px; align-items:flex-start">
-        <div style="min-width:36px; height:36px; background:#1877F2; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0">2️⃣</div>
-        <div>
-          <div style="font-weight:700; font-size:0.95rem; margin-bottom:4px">選「<strong style="color:#4a9dff">在 Safari 中開啟</strong>」</div>
-          <div style="color:#888; font-size:0.82rem">選單裡會有瀏覽器圖示的選項</div>
-        </div>
-      </div>
-
-      <div style="background:#1a1200; border:1px solid #f5a623; border-radius:14px; padding:16px; display:flex; gap:14px; align-items:flex-start">
-        <div style="min-width:36px; height:36px; background:#f5a623; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0">💡</div>
-        <div>
-          <div style="font-weight:700; font-size:0.95rem; margin-bottom:4px; color:#f5c842">沒看到選項？</div>
-          <div style="color:#aaa; font-size:0.82rem">點下方連結複製，再手動貼到 Safari 網址列</div>
-        </div>
-      </div>
-
     </div>
 
-    <div class="url-display" id="url-display-ios" style="cursor:pointer" title="點擊複製網址"></div>
-    <div style="color:#555; font-size:0.78rem; margin-top:8px">👆 點上方連結即可複製</div>
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-badge">1</div>
+        <div class="step-content">
+          <div class="step-title">點右上角「<span class="highlight">⋯</span>」按鈕</div>
+          <div class="step-desc">畫面右上方三個點的更多選單</div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-badge">2</div>
+        <div class="step-content">
+          <div class="step-title">選「<span class="highlight">在 Safari 中開啟</span>」</div>
+          <div class="step-desc">選單裡會有瀏覽器圖示的選項</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-badge">💡</div>
+      <div class="step-content tip-content">
+        <div class="step-title">沒看到選項？</div>
+        <div class="step-desc">複製下方連結，貼到 Safari 網址列開啟</div>
+      </div>
+    </div>
+
+    <div class="copy-box" id="copy-box-ios">
+      <span class="copy-url" id="url-display-ios"></span>
+      <div class="copy-btn-icon">
+        <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+      </div>
+    </div>
+    <div class="copy-hint">點上方複製連結</div>
   </div>
 
 </div>
@@ -276,68 +379,46 @@
 <script>
   const TARGET = 'https://linkgoods.com/jasstudio';
 
-  function isFBWebView() {
-    const ua = navigator.userAgent || '';
-    return /FBAN|FBAV|FB_IAB|FBIOS|FB4A|FBDV/.test(ua);
-  }
+  const isFB  = () => /FBAN|FBAV|FB_IAB|FBIOS|FB4A|FBDV/.test(navigator.userAgent);
+  const isAndroid = () => /Android/i.test(navigator.userAgent);
+  const isIOS = () => /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-  function isAndroid() {
-    return /Android/i.test(navigator.userAgent);
-  }
-
-  function isIOS() {
-    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  }
-
-  function copyToClipboard(text) {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(text).catch(() => {});
-    }
+  function copyText(text, box) {
+    navigator.clipboard?.writeText(text).catch(() => {});
+    const url = box.querySelector('.copy-url');
+    const orig = url.textContent;
+    url.textContent = '✅ 已複製！';
+    setTimeout(() => { url.textContent = orig; }, 2000);
   }
 
   window.addEventListener('DOMContentLoaded', () => {
-    if (isFBWebView()) {
-      document.getElementById('state-redirect').style.display = 'none';
+    if (!isFB()) {
+      window.location.replace(TARGET);
+      return;
+    }
 
-      if (isAndroid()) {
-        document.getElementById('state-android').style.display = 'block';
+    document.getElementById('state-redirect').style.display = 'none';
 
-        // Intent URL: try to open in Chrome directly
-        const intentUrl = `intent://${TARGET.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=${encodeURIComponent(TARGET)};end`;
-        document.getElementById('btn-android-intent').href = intentUrl;
-
-        const disp = document.getElementById('url-display-android');
-        disp.textContent = TARGET;
-        disp.style.cursor = 'pointer';
-        disp.title = '點擊複製';
-        disp.addEventListener('click', () => {
-          copyToClipboard(TARGET);
-          disp.textContent = '✅ 已複製！';
-          setTimeout(() => { disp.textContent = TARGET; }, 2000);
-        });
-
-      } else if (isIOS()) {
-        document.getElementById('state-ios').style.display = 'block';
-
-        const disp = document.getElementById('url-display-ios');
-        disp.textContent = TARGET;
-        disp.style.cursor = 'pointer';
-        disp.title = '長按複製';
-        disp.addEventListener('click', () => {
-          copyToClipboard(TARGET);
-          disp.textContent = '✅ 已複製！';
-          setTimeout(() => { disp.textContent = TARGET; }, 2000);
-        });
-
-      } else {
-        // Unknown FB WebView
-        document.getElementById('state-android').style.display = 'block';
-        document.getElementById('url-display-android').textContent = TARGET;
-      }
+    if (isIOS()) {
+      const el = document.getElementById('state-ios');
+      el.style.display = 'block';
+      document.getElementById('url-display-ios').textContent = TARGET;
+      document.getElementById('copy-box-ios').addEventListener('click', () => {
+        copyText(TARGET, document.getElementById('copy-box-ios'));
+      });
 
     } else {
-      // Normal browser → redirect immediately
-      window.location.replace(TARGET);
+      // Android or unknown
+      const el = document.getElementById('state-android');
+      el.style.display = 'block';
+      document.getElementById('url-display-android').textContent = TARGET;
+
+      const intentUrl = `intent://${TARGET.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=${encodeURIComponent(TARGET)};end`;
+      document.getElementById('btn-android-intent').href = intentUrl;
+
+      document.getElementById('copy-box-android').addEventListener('click', () => {
+        copyText(TARGET, document.getElementById('copy-box-android'));
+      });
     }
   });
 </script>
