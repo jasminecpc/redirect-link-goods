@@ -1,1 +1,1 @@
-# redirect-link-goods
+# redirect
